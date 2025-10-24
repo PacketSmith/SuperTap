@@ -55,7 +55,6 @@ func main() {
 			})
 
 		case "game":
-			rl.DrawText(strconv.Itoa(score), int32(width/2)-int32(rl.MeasureText(strconv.Itoa(score), fontSize)/2), 100, fontSize, rl.DarkGray)
 			box := rl.Rectangle{X: float32(boxX), Y: float32(boxY), Width: float32(boxWidth), Height: float32(boxHeight)}
 			rl.DrawRectangleRec(box, rl.LightGray)
 			boxY = boxY + int((rl.GetFrameTime() * float32(speed)))
@@ -73,6 +72,8 @@ func main() {
 			if gameRound == gameRounds {
 				gameState = "roundOver"
 			}
+			// Draw score last so it's always visible
+			rl.DrawText(strconv.Itoa(score), int32(width/2)-int32(rl.MeasureText(strconv.Itoa(score), fontSize)/2), 100, fontSize, rl.DarkGray)
 
 		case "roundOver":
 			text = "SuperTap! Over"
