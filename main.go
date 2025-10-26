@@ -23,9 +23,8 @@ func main() {
 	rl.SetTargetFPS(int32(rl.GetMonitorRefreshRate(rl.GetCurrentMonitor())))
 
 	fmt.Printf(strconv.Itoa(rl.GetMonitorRefreshRate(rl.GetCurrentMonitor())) + "\n")
-	var boxWidth int = 50
-	var boxHeight int = 50
-	var boxX int = rand.IntN(width-boxWidth) + 1
+	var boxSize int = 50
+	var boxX int = rand.IntN(width-boxSize/2) + boxSize
 	var boxY int = 1
 	var speed int = 500
 	var score int = 0     // Reset starting score
@@ -50,22 +49,26 @@ func main() {
 			// text = "Click to start"
 			// fontSize = 24
 			// rl.DrawText(text, int32(width/2)-int32(rl.MeasureText(text, fontSize)/2), 325, fontSize, rl.DarkGray)
-			Button("Click to start", int32(width/2), int32(float32(height)*1.5/2), 40, func() {
+			Button("Click to start", width/2, int(float64(height)*1.5/2), 40, func() {
 				gameState = "game"
 			})
 
 		case "game":
-			box := rl.Rectangle{X: float32(boxX), Y: float32(boxY), Width: float32(boxWidth), Height: float32(boxHeight)}
-			rl.DrawRectangleRec(box, rl.LightGray)
+			// box := rl.Rectangle{X: float32(boxX), Y: float32(boxY), Width: float32(boxSize), Height: float32(boxSize)}
+			// rl.DrawRectangleRec(box, rl.LightGray)
 			boxY = boxY + int((rl.GetFrameTime() * float32(speed)))
-			if rl.IsMouseButtonReleased(rl.MouseLeftButton) && rl.CheckCollisionPointRec(rl.GetMousePosition(), box) {
-				println("Box clicked!")
+			// if rl.IsMouseButtonReleased(rl.MouseLeftButton) && rl.CheckCollisionPointRec(rl.GetMousePosition(), box) {
+			// println("Box clicked!")
+			// score++
+			// }
+
+			Button("", boxX, boxY, boxSize, func() {
 				score++
-			}
+			})
 
 			if boxY >= height {
-				boxY = 1 - boxHeight
-				boxX = rand.IntN(width-boxWidth) + 1
+				boxY = 1 - boxSize
+				boxX = rand.IntN(width-boxSize) + 1
 				gameRound++
 			}
 
