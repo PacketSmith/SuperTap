@@ -54,14 +54,8 @@ func main() {
 			})
 
 		case "game":
-			// box := rl.Rectangle{X: float32(boxX), Y: float32(boxY), Width: float32(boxSize), Height: float32(boxSize)}
-			// rl.DrawRectangleRec(box, rl.LightGray)
-			boxY = boxY + int((rl.GetFrameTime() * float32(speed)))
-			// if rl.IsMouseButtonReleased(rl.MouseLeftButton) && rl.CheckCollisionPointRec(rl.GetMousePosition(), box) {
-			// println("Box clicked!")
-			// score++
-			// }
 
+			boxY = boxY + int((rl.GetFrameTime() * float32(speed)))
 			Button("", boxX, boxY, boxSize, func() {
 				score++
 			})
